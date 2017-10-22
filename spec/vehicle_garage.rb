@@ -40,16 +40,11 @@ class VehicleGarage
               if vehicle.weight < result.weight
                 result = vehicle
               end
-
           end
-
         end
       end
-      
 
       return result
-
-
     end
 
 
