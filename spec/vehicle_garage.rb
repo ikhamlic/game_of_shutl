@@ -5,27 +5,19 @@ class VehicleGarage
 
   def add_vehicle(vehicle)
     @vehicles[vehicle.name] = vehicle
+    self
   end
+
 
   def delivery_mark_up(vehicle_name)
     return @vehicles[vehicle_name].mark_up
   end
 
-  def price_limit(price)
-    result = Vehicle.new("no_vehicle_found", 1, 9999999, 0, 0, 0, 0)
-    @vehicles.each_value do |vehicle|
-      if vehicle.price > price && vehicle.price < result.price
-        result = vehicle
-      end
-    end
-
-    return result
-
-  end
 
 
 
-    def adapted_vehicle(products, priority = "size")
+
+    def adapted_vehicle(products, price, priority = "size")
       size = 0
       weight = 0
       result = Vehicle.new("no_vehicle_found", 1, 9999999, 999999, 999999, 999999, 999999)
@@ -37,7 +29,7 @@ class VehicleGarage
 
       @vehicles.each_value do |vehicle|
 
-        if size < vehicle.size && weight < vehicle.weight
+        if size < vehicle.size && weight < vehicle.weight && vehicle.price_limit > price && vehicle.price_limit < result.price_limit
 
           case priority
             when "size"
@@ -53,10 +45,26 @@ class VehicleGarage
 
         end
       end
+      
 
-      return result.name
+      return result
 
 
+    end
+
+
+
+
+    def self.default_garage
+      garage = VehicleGarage.new()
+      garage.add_vehicle(Vehicle.new("bicycle", 0.1, 500, 30, 25, 10, 3))
+          .add_vehicle(Vehicle.new("motorbike", 0.15, 750, 35, 25, 25, 6))
+          .add_vehicle(Vehicle.new("parcel_car", 0.2, 1000, 100, 100, 75, 50))
+          .add_vehicle(Vehicle.new("small_van", 0.3, 1500, 133, 133, 133, 400))
+          .add_vehicle(Vehicle.new("large_van", 0.4, 9999999, 9999999, 9999999, 9999999, 9999999))
+
+
+      return garage
     end
 
   end
