@@ -21,4 +21,8 @@ describe 'Basic Service' do
     expect(quote['delivery_postcode']).to eql "EC2A 3LT"
     expect(quote['price']).to eql 679
   end
+
+
+
+
 end

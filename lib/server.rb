@@ -16,9 +16,8 @@ module GameOfShutl
 
 
 
-      adapted_vehicle = garage.adapted_vehicle(quote["products"], price)
+      adapted_vehicle = garage.adapted_vehicle(quote['products'], price)
       price = price + garage.delivery_mark_up(adapted_vehicle) * price
-
 
 
 
@@ -31,7 +30,7 @@ module GameOfShutl
           pickup_postcode: quote['pickup_postcode'],
           delivery_postcode: quote['delivery_postcode'],
           price: price,
-          vehicle: adapted_vehicle.name
+          vehicle_id: adapted_vehicle.name
 
         }
       }.to_json
